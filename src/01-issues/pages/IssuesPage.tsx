@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { Typography, Button, Stack } from "@mui/material";
 import { GridColDef } from "@mui/x-data-grid";
 import { DataGridComponent } from "@shared/components/DataGridComponent";
-import { SideBarMenu } from "@shared/components/SideBarMenu";
+import { SideBarLayout } from "@shared/layouts/SideBarLayout";
 import styled from "@emotion/styled";
 
-import { MainLayout } from "../layouts/MainLayout";
+import { SideBarMenu } from "../components/SideBarMenu";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", flex: 1 },
@@ -53,7 +53,7 @@ export const IssuesPage: FC = () => {
   const [isOpenSideBar, setIsOpenSideBar] = useState(false);
 
   return (
-    <MainLayout
+    <SideBarLayout
       sideBar={
         <SideBarMenu
           isOpen={isOpenSideBar}
@@ -79,7 +79,7 @@ export const IssuesPage: FC = () => {
       </Stack>
 
       <DataGridComponent columns={columns} height={400} pageSize={5} rows={rows} />
-    </MainLayout>
+    </SideBarLayout>
   );
 };
 

@@ -5,7 +5,7 @@ interface Props extends PropsWithChildren {
   sideBar: React.ReactElement;
 }
 
-export const MainLayout: FC<Props> = ({ children, sideBar }) => {
+export const SideBarLayout: FC<Props> = ({ children, sideBar }) => {
   return (
     <Box>
       <Stack direction="row" gap={2}>

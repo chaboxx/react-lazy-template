@@ -1,8 +1,0 @@
-@keyframes side-bar-animation {
-  0% {
-    transform: translate(0%);
-  }
-  100% {
-    transform: translate(100%);
-  }
-}
