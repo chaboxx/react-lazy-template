@@ -1,27 +1,92 @@
-import { FC } from "react";
-import { Box, Typography, Button } from "@mui/material";
+import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Typography, Button, Stack } from "@mui/material";
+import { GridColDef } from "@mui/x-data-grid";
+import { DataGridComponent } from "@shared/components/DataGridComponent";
+import { SideBarMenu } from "@shared/components/SideBarMenu";
+import styled from "@emotion/styled";
+
+import { MainLayout } from "../layouts/MainLayout";
+
+const columns: GridColDef[] = [
+  { field: "id", headerName: "ID", flex: 1 },
+  { field: "firstName", headerName: "First name", flex: 1 },
+  { field: "lastName", headerName: "Last name", flex: 1 },
+  {
+    field: "age",
+    headerName: "Age",
+    type: "number",
+    width: 90,
+    flex: 1,
+  },
+  {
+    field: "fullName",
+    headerName: "Full name",
+    description: "This column has a value getter and is not sortable.",
+    sortable: false,
+    width: 160,
+    flex: 1,
+  },
+];
+
+const rows = [
+  { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
+  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
+  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
+  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
+  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
+  { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
+  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
+  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
+  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
+];
+
+const links = [
+  {
+    href: "Home",
+  },
+];
 
 export const IssuesPage: FC = () => {
   const navigate = useNavigate();
 
+  const [isOpenSideBar, setIsOpenSideBar] = useState(false);
+
   return (
-    <Box>
-      <Typography variant="h2">Issues</Typography>
-      <Box display="flex" gap={2}>
-        <Button variant="outlined" onClick={() => navigate("")}>
-          Issues
-        </Button>
-        <Button variant="outlined" onClick={() => navigate("dependencies")}>
-          Dependecies
-        </Button>
-        <Button variant="outlined" onClick={() => navigate("name")}>
-          Name
-        </Button>
+    <MainLayout
+      sideBar={
+        <SideBarMenu
+          isOpen={isOpenSideBar}
+          links={links}
+          maxWidth={400}
+          title="Issues SideBar"
+        />
+      }
+    >
+      <Typography fontSize={32} variant="h1">
+        Issues
+      </Typography>
+      <Stack direction="row" gap={2} mb={3} mt={2}>
+        <StyledButton
+          variant="contained"
+          onClick={() => setIsOpenSideBar(!isOpenSideBar)}
+        >
+          Toggle Side Bar
+        </StyledButton>
         <Button variant="outlined" onClick={() => navigate("problem")}>
           Error
         </Button>
-      </Box>
-    </Box>
+      </Stack>
+
+      <DataGridComponent columns={columns} height={400} pageSize={5} rows={rows} />
+    </MainLayout>
   );
 };
+
+const StyledButton = styled(Button)`
+  @media screen and (max-width: 768px) {
+    & {
+      display: none;
+    }
+  }
+`;

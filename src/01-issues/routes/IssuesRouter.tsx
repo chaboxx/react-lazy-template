@@ -1,6 +1,6 @@
-import { Loader } from "@shared/components/Loader";
 import { FC, lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
+import { Loader } from "@shared/components/Loader";
 
 import { IssuesByNamePage } from "../pages/IssuesByNamePage";
 import { IssuesPage } from "../pages/IssuesPage";
