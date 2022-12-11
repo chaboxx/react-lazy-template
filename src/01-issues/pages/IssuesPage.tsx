@@ -1,11 +1,13 @@
 import { FC, useState } from "react";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { FaWindowClose } from "react-icons/fa";
 import { GridColDef } from "@mui/x-data-grid";
 import { DataGridComponent } from "@shared/components/DataGridComponent";
 import { SideBarLayout } from "@shared/layouts/side-bar/SideBarLayout";
 import { SideBar } from "@shared/layouts/side-bar/SideBar";
 import { SideBarBody } from "@shared/layouts/side-bar/SideBarBody";
+
+import { useGetIssues } from "../hooks/useGetIssues";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", flex: 1 },
@@ -40,16 +42,12 @@ const rows = [
   { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
 ];
 
-const links = [
-  {
-    href: "Home",
-  },
-];
-
 export const IssuesPage: FC = () => {
-  // const navigate = useNavigate();
-
   const [isOpenSideBar, setIsOpenSideBar] = useState(false);
+
+  const { data, isLoading, error } = useGetIssues();
+
+  console.log({ data, isLoading, error });
 
   return (
     <SideBarLayout
