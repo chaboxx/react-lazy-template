@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { Typography, Button, Stack } from "@mui/material";
 import { GridColDef } from "@mui/x-data-grid";
 import { DataGridComponent } from "@shared/components/DataGridComponent";
-import { SideBarLayout } from "@shared/layouts/SideBarLayout";
+import { SideBarLayout } from "@shared/layouts/side-bar/SideBarLayout";
 import styled from "@emotion/styled";
+import { SideBar } from "@shared/layouts/side-bar/SideBar";
+import { SideBarBody } from "@shared/layouts/side-bar/SideBarBody";
 
 import { SideBarMenu } from "../components/SideBarMenu";
 
@@ -48,45 +50,59 @@ const links = [
 ];
 
 export const IssuesPage: FC = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [isOpenSideBar, setIsOpenSideBar] = useState(false);
 
   return (
     <SideBarLayout
-      sideBar={
-        <SideBarMenu
-          isOpen={isOpenSideBar}
-          links={links}
-          maxWidth={400}
-          title="Issues SideBar"
-        />
-      }
+      maxWidthSideBar={300}
+      open={isOpenSideBar}
+      onClose={() => setIsOpenSideBar(false)}
     >
-      <Typography fontSize={32} variant="h1">
-        Issues
-      </Typography>
-      <Stack direction="row" gap={2} mb={3} mt={2}>
-        <StyledButton
-          variant="contained"
-          onClick={() => setIsOpenSideBar(!isOpenSideBar)}
-        >
-          Toggle Side Bar
-        </StyledButton>
-        <Button variant="outlined" onClick={() => navigate("problem")}>
-          Error
-        </Button>
-      </Stack>
-
-      <DataGridComponent columns={columns} height={400} pageSize={5} rows={rows} />
+      <SideBar>
+        <Typography fontSize={32} variant="h1">
+          Issues
+        </Typography>
+        <Typography fontSize={32} variant="h1">
+          Issues
+        </Typography>
+        <Typography fontSize={32} variant="h1">
+          Issues
+        </Typography>
+        <Typography fontSize={32} variant="h1">
+          Issues
+        </Typography>
+        <Typography fontSize={32} variant="h1">
+          Issues
+        </Typography>
+        <Typography fontSize={32} variant="h1">
+          Issues
+        </Typography>
+        <Typography fontSize={32} variant="h1">
+          Issues
+        </Typography>
+      </SideBar>
+      <SideBarBody>
+        <Button onClick={() => setIsOpenSideBar(!isOpenSideBar)}>Toggle</Button>
+        <DataGridComponent columns={columns} height={400} pageSize={5} rows={rows} />
+        <DataGridComponent columns={columns} height={400} pageSize={5} rows={rows} />
+        <DataGridComponent columns={columns} height={400} pageSize={5} rows={rows} />
+        <DataGridComponent columns={columns} height={400} pageSize={5} rows={rows} />
+        <DataGridComponent columns={columns} height={400} pageSize={5} rows={rows} />
+        <DataGridComponent columns={columns} height={400} pageSize={5} rows={rows} />
+        <DataGridComponent columns={columns} height={400} pageSize={5} rows={rows} />
+        <DataGridComponent columns={columns} height={400} pageSize={5} rows={rows} />
+        <DataGridComponent columns={columns} height={400} pageSize={5} rows={rows} />
+      </SideBarBody>
     </SideBarLayout>
   );
 };
 
-const StyledButton = styled(Button)`
-  @media screen and (max-width: 768px) {
-    & {
-      display: none;
-    }
-  }
-`;
+// const StyledButton = styled(Button)`
+//   @media screen and (max-width: 768px) {
+//     & {
+//       display: none;
+//     }
+//   }
+// `;
