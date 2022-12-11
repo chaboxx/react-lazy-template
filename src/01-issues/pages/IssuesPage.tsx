@@ -1,14 +1,11 @@
 import { FC, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Typography, Button, Stack } from "@mui/material";
+import { Button } from "@mui/material";
+import { FaWindowClose } from "react-icons/fa";
 import { GridColDef } from "@mui/x-data-grid";
 import { DataGridComponent } from "@shared/components/DataGridComponent";
 import { SideBarLayout } from "@shared/layouts/side-bar/SideBarLayout";
-import styled from "@emotion/styled";
 import { SideBar } from "@shared/layouts/side-bar/SideBar";
 import { SideBarBody } from "@shared/layouts/side-bar/SideBarBody";
-
-import { SideBarMenu } from "../components/SideBarMenu";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", flex: 1 },
@@ -56,53 +53,17 @@ export const IssuesPage: FC = () => {
 
   return (
     <SideBarLayout
-      maxWidthSideBar={300}
+      closeIcon={<FaWindowClose size={23} />}
       open={isOpenSideBar}
       onClose={() => setIsOpenSideBar(false)}
     >
       <SideBar>
-        <Typography fontSize={32} variant="h1">
-          Issues
-        </Typography>
-        <Typography fontSize={32} variant="h1">
-          Issues
-        </Typography>
-        <Typography fontSize={32} variant="h1">
-          Issues
-        </Typography>
-        <Typography fontSize={32} variant="h1">
-          Issues
-        </Typography>
-        <Typography fontSize={32} variant="h1">
-          Issues
-        </Typography>
-        <Typography fontSize={32} variant="h1">
-          Issues
-        </Typography>
-        <Typography fontSize={32} variant="h1">
-          Issues
-        </Typography>
+        <Button>Hola Mundo</Button>
       </SideBar>
       <SideBarBody>
         <Button onClick={() => setIsOpenSideBar(!isOpenSideBar)}>Toggle</Button>
-        <DataGridComponent columns={columns} height={400} pageSize={5} rows={rows} />
-        <DataGridComponent columns={columns} height={400} pageSize={5} rows={rows} />
-        <DataGridComponent columns={columns} height={400} pageSize={5} rows={rows} />
-        <DataGridComponent columns={columns} height={400} pageSize={5} rows={rows} />
-        <DataGridComponent columns={columns} height={400} pageSize={5} rows={rows} />
-        <DataGridComponent columns={columns} height={400} pageSize={5} rows={rows} />
-        <DataGridComponent columns={columns} height={400} pageSize={5} rows={rows} />
-        <DataGridComponent columns={columns} height={400} pageSize={5} rows={rows} />
         <DataGridComponent columns={columns} height={400} pageSize={5} rows={rows} />
       </SideBarBody>
     </SideBarLayout>
   );
 };
-
-// const StyledButton = styled(Button)`
-//   @media screen and (max-width: 768px) {
-//     & {
-//       display: none;
-//     }
-//   }
-// `;

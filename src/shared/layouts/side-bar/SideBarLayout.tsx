@@ -1,17 +1,20 @@
-import React, { createContext, FC, PropsWithChildren, useEffect, useState } from "react";
+import React, { createContext, FC, PropsWithChildren } from "react";
 import { Box } from "@mui/material";
+import { AiFillLeftSquare } from "react-icons/ai";
 
 interface Props extends PropsWithChildren {
   // sideBar?: React.ReactElement;
   open: boolean;
-  maxWidthSideBar: number;
+  maxWidthSideBar?: number;
   onClose: () => void;
+  closeIcon?: React.ReactElement;
 }
 
 interface SideBarLayoutValues {
   open: boolean;
-  maxWidthSideBar: number;
+  maxWidthSideBar?: number;
   onClose: () => void;
+  closeIcon?: React.ReactElement;
 }
 
 export const SideBarLayoutContext = createContext({} as SideBarLayoutValues);
@@ -19,7 +22,8 @@ export const SideBarLayoutContext = createContext({} as SideBarLayoutValues);
 export const SideBarLayout: FC<Props> = ({
   children,
   open,
-  maxWidthSideBar,
+  maxWidthSideBar = 350,
+  closeIcon = <AiFillLeftSquare size={25} />,
   onClose,
 }) => {
   return (
@@ -28,6 +32,7 @@ export const SideBarLayout: FC<Props> = ({
         open,
         onClose,
         maxWidthSideBar,
+        closeIcon,
       }}
     >
       <Box>{children}</Box>

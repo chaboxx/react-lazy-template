@@ -1,5 +1,6 @@
 import { FC, PropsWithChildren, useContext } from "react";
 import { Box, Container } from "@mui/material";
+import styled from "@emotion/styled";
 
 import { SideBarLayoutContext } from "./SideBarLayout";
 
@@ -11,10 +12,11 @@ export const SideBarBody: FC<Props> = ({ children, style }) => {
   const { open, maxWidthSideBar } = useContext(SideBarLayoutContext);
 
   return (
-    <Box
+    <StyledBox
       ml={{
-        xl: open ? `${maxWidthSideBar + 25}px` : 0,
-        md: open ? "275px" : 0,
+        xl: open ? `${maxWidthSideBar! + 25}px` : 0,
+        md: open ? "265px" : 0,
+        sm: open ? "215px" : 0,
       }}
       style={style}
       sx={{
@@ -22,6 +24,14 @@ export const SideBarBody: FC<Props> = ({ children, style }) => {
       }}
     >
       <Container maxWidth="xl">{children}</Container>
-    </Box>
+    </StyledBox>
   );
 };
+
+const StyledBox = styled(Box)`
+  @media screen and (max-width: 768px) {
+    & {
+      margin-left: 0;
+    }
+  }
+`;

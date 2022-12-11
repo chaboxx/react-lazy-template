@@ -1,44 +1,53 @@
-import { FC, PropsWithChildren, useContext } from "react";
-import { Box, Button, Stack } from "@mui/material";
-import { AiFillLeftSquare } from "react-icons/ai";
+import React, { FC, PropsWithChildren, useContext } from "react";
+import { Box, Stack } from "@mui/material";
+import styled from "@emotion/styled";
 
 import { SideBarLayoutContext } from "./SideBarLayout";
 
 interface Props extends PropsWithChildren {}
 
 export const SideBar: FC<Props> = ({ children }) => {
-  const { open, onClose, maxWidthSideBar } = useContext(SideBarLayoutContext);
+  const { open, onClose, maxWidthSideBar, closeIcon } = useContext(SideBarLayoutContext);
 
   return (
-    <Stack
-      bgcolor="white"
-      borderRight="1px solid black"
-      direction="column"
+    <StyledBox
       display={open ? "flex" : "none"}
-      height="100vh"
-      left={0}
-      padding={2}
-      position="fixed"
-      sx={{
-        transition: "all 0.3s ease",
-      }}
-      top={0}
       width={{
         xl: maxWidthSideBar,
         md: 250,
+        sm: 200,
       }}
-      zIndex={9}
     >
       <Box
+        bgcolor="white"
+        display="flex"
         position="absolute"
-        right={-12}
+        right={!closeIcon?.props?.size ? -7 : -(closeIcon?.props.size / 2)}
         top={5}
         zIndex={19}
         onClick={() => (open ? onClose() : null)}
       >
-        <AiFillLeftSquare size={24} />
+        {closeIcon}
       </Box>
       {children}
-    </Stack>
+    </StyledBox>
   );
 };
+
+const StyledBox = styled(Stack)`
+  border-right: 1px solid black;
+  direction: column;
+  background-color: white;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  padding: 15px;
+  position: fixed;
+  transition: all 0.3s ease;
+  z-index: 9;
+  @media screen and (max-width: 768px) {
+    & {
+      display: none;
+    }
+  }
+`;
